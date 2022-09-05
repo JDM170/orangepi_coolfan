@@ -9,8 +9,7 @@ readonly MSG_OFF="Fan OFF!"
 
 setup()
 {
-    gpio export $FAN_PIN
-    gpio mode $FAN_PIN out
+    gpio export $FAN_PIN out
     gpio write $FAN_PIN 0
     old_state=$(gpio read $FAN_PIN)
 }

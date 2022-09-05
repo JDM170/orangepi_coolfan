@@ -1,5 +1,6 @@
 [Unit]
 Description=Controls cooling fan on GPIO
+
 [Service]
 Type=simple
 ExecStart=/usr/bin/coolfan-start
@@ -10,6 +11,4 @@ OOMScoreAdjust=-100
 TimeoutSec=20
 
 [Install]
-
 WantedBy=multi-user.target
-

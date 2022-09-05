@@ -64,3 +64,11 @@ systemctl start coolfan - запуск
 systemctl restart coolfan - перезапуск
 systemctl stop coolfan - остановка
 ```
+
+---
+
+## Если служба падает с 203 кодом ошибки:
+```
+Нужно убедиться что у скриптов coolfan-* стоят права -rwxrwxrwx
+Их можно задать следующей командой: chmod 777 /usr/bin/coolfan-*
+```
