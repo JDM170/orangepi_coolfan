@@ -14,7 +14,6 @@ setup()
     gpio write $FAN_PIN 0
     old_state=$(gpio read $FAN_PIN)
 }
-
 cleanup()
 {
     gpio write $FAN_PIN 0
@@ -25,18 +24,15 @@ on()
 {
     gpio write $FAN_PIN 1
 }
-
 off()
 {
     gpio write $FAN_PIN 0
 }
-
 case $1 in
-    on|off) "$1";;
+    on|off ) "$1";;
 esac
 
 cur_state=$(gpio read $FAN_PIN)
-
 if [ "$old_state" != "$cur_state" ] && [ -z "$2" ]; then
     if [ "$cur_state" = 0 ]; then
         echo $MSG_OFF
