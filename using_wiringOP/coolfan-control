@@ -1,0 +1,46 @@
+#!/bin/sh
+
+# Physical  | V | Mode | Name     | wPi | GPIO
+# 8         | 0 | OUT  | TXD.3    | 3   | 13
+readonly FAN_PIN="3"
+
+readonly MSG_ON="Fan ON!"
+readonly MSG_OFF="Fan OFF!"
+
+setup()
+{
+    gpio export $FAN_PIN
+    gpio mode $FAN_PIN out
+    gpio write $FAN_PIN 0
+    old_state=$(gpio read $FAN_PIN)
+}
+
+cleanup()
+{
+    gpio write $FAN_PIN 0
+    gpio unexport $FAN_PIN
+}
+
+on()
+{
+    gpio write $FAN_PIN 1
+}
+
+off()
+{
+    gpio write $FAN_PIN 0
+}
+
+case $1 in
+    on|off) "$1";;
+esac
+
+cur_state=$(gpio read $FAN_PIN)
+
+if [ "$old_state" != "$cur_state" ] && [ -z "$2" ]; then
+    if [ "$cur_state" = 0 ]; then
+        echo $MSG_OFF
+    else
+        echo $MSG_ON
+    fi
+fi

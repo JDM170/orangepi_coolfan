@@ -2,17 +2,17 @@
 
 # Physical  | V | Mode | Name     | wPi | GPIO
 # 8         | 0 | OUT  | TXD.3    | 3   | 13
-readonly FAN_PIN=13
+readonly FAN_PIN="13"
 readonly FAN_PATH=/sys/class/gpio/gpio${FAN_PIN}
 
-readonly MSG_ON='Fan ON!'
-readonly MSG_OFF='Fan OFF!'
+readonly MSG_ON="Fan ON!"
+readonly MSG_OFF="Fan OFF!"
 old_state=$(cat $FAN_PATH/value)
 
-initialize()
+setup()
 {
     echo $FAN_PIN > /sys/class/gpio/export
-    echo 'out' > $FAN_PATH/direction
+    echo "out" > $FAN_PATH/direction
     echo 0 > $FAN_PATH/value
 }
 

@@ -12,7 +12,7 @@ cleanup()
 
 trap cleanup 15
 
-/usr/bin/coolfan-control initialize
+/usr/bin/coolfan-control setup
 
 while :; do
     echo $$ > /var/run/coolfan.pid
