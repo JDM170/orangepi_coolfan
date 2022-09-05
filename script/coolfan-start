@@ -5,6 +5,7 @@ FAN_STOP=36000
 
 cleanup()
 {
+    /usr/bin/coolfan-control cleanup
     rm /var/run/coolfan.pid
     exit 0
 }

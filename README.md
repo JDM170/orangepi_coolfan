@@ -17,14 +17,14 @@ echo 13 > /sys/class/gpio/unexport
 
 ---
 
-## Получение назначения пина in/out:
+## Получение направления GPIO-пина (in/out):
 ```
 cat /sys/class/gpio/gpio(номер пина)/direction
 ```
 
 ---
 
-## Смена назначения пина (in - вход, out - выход):
+## Смена направления GPIO-пина (in - вход, out - выход):
 ```
 echo in > /sys/class/gpio/gpio(номер пина)/direction
 echo out > /sys/class/gpio/gpio(номер пина)/direction
@@ -32,14 +32,14 @@ echo out > /sys/class/gpio/gpio(номер пина)/direction
 
 ---
 
-## Получение значения пина low(0)/high(1):
+## Получение значения GPIO-пина low(0)/high(1):
 ```
 cat /sys/class/gpio/gpio(номер пина)/value
 ```
 
 ---
 
-## Смена значений пина (low/high):
+## Смена значений GPIO-пина (low/high):
 ```
 echo 0 > /sys/class/gpio/gpio(номер пина)/value
 echo 1 > /sys/class/gpio/gpio(номер пина)/value
@@ -59,7 +59,8 @@ coolfan.service ---- /etc/systemd/system/
 ```
 systemctl enable coolfan.service - включение
 systemctl disable coolfan.service - отключение
-systemctl start coolfan.service - запуск
-systemctl status coolfan.service - статус
-systemctl stop coolfan.service - остановка
+systemctl status coolfan - статус
+systemctl start coolfan - запуск
+systemctl restart coolfan - перезапуск
+systemctl stop coolfan - остановка
 ```

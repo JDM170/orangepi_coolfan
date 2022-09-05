@@ -2,7 +2,6 @@
 
 # Physical  | V | Mode | Name     | wPi | GPIO
 # 8         | 0 | OUT  | TXD.3    | 3   | 13
-# 38        | 0 | OUT  | TXD.1    | 26  | 198
 readonly FAN_PIN=13
 readonly FAN_PATH=/sys/class/gpio/gpio${FAN_PIN}
 
@@ -15,6 +14,12 @@ initialize()
     echo $FAN_PIN > /sys/class/gpio/export
     echo 'out' > $FAN_PATH/direction
     echo 0 > $FAN_PATH/value
+}
+
+cleanup()
+{
+    echo 0 > $FAN_PATH/value
+    echo $FAN_PIN > /sys/class/gpio/unexport
 }
 
 on()
