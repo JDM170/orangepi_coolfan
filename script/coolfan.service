@@ -1,0 +1,15 @@
+[Unit]
+Description=Controls cooling fan on GPIO
+[Service]
+Type=simple
+ExecStart=/usr/bin/coolfan-start
+ExecStop=/usr/bin/coolfan-stop
+Restart=always
+PIDFile=/var/run/coolfan.pid
+OOMScoreAdjust=-100
+TimeoutSec=20
+
+[Install]
+
+WantedBy=multi-user.target
+

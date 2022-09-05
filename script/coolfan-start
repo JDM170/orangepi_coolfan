@@ -1,0 +1,29 @@
+#!/bin/sh
+
+FAN_START=45000
+FAN_STOP=36000
+
+cleanup()
+{
+    rm /var/run/coolfan.pid
+    exit 0
+}
+
+trap cleanup 15
+
+/usr/bin/coolfan-control initialize
+
+while :; do
+    echo $$ > /var/run/coolfan.pid
+
+    TEMP=$(cat /sys/class/thermal/thermal_zone0/temp)
+
+    if [ "$TEMP" -ge "$FAN_START" ]; then
+        /usr/bin/coolfan-control on
+    else
+        if [ "$TEMP" -le "$FAN_STOP" ]; then
+            /usr/bin/coolfan-control off
+        fi
+    fi
+    sleep 10
+done
