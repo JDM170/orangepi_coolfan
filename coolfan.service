@@ -3,7 +3,7 @@ Description=Controls cooling fan on GPIO
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/coolfan-start
+ExecStart=/usr/bin/coolfan-control
 ExecStop=/usr/bin/coolfan-stop
 Restart=always
 PIDFile=/var/run/coolfan.pid
