@@ -10,12 +10,16 @@ wiringOP: <https://github.com/orangepi-xunlong/wiringOP>
 - Перейти в директорию репозитория:
 ```cd orangepi_coolfan```
 - Скопировать скрипты:
-```cp coolfan-control /usr/bin```
-```cp coolfan-stop /usr/bin```
-```cp coolfan.service /etc/systemd/system```
+```
+cp coolfan-control /usr/bin
+cp coolfan-stop /usr/bin
+cp coolfan.service /etc/systemd/system
+```
 - Активировать и запустить службу:
-```systemctl enable coolfan.service```
-```systemctl start coolfan```
+```
+systemctl enable coolfan.service
+systemctl start coolfan
+```
 ---
 ## Управление:
 Управление службой производится следующими командами:
@@ -29,5 +33,7 @@ wiringOP: <https://github.com/orangepi-xunlong/wiringOP>
 - Узнать можно их следующим способом:
 ```ls -la /usr/bin | grep coolfan```
 - Если права не совпадают, то нужно обновить их следующей командой:
-```chmod 777 /usr/bin/coolfan-control```
-```chmod 777 /usr/bin/coolfan-stop```
+```
+chmod 777 /usr/bin/coolfan-control
+chmod 777 /usr/bin/coolfan-stop
+```

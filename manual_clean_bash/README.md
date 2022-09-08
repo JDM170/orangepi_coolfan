@@ -1,13 +1,19 @@
 ## Небольшой мануал по командам на чистом bash
 ---
 Включение GPIO-порта:
-```echo <номер порта> > /sys/class/gpio/export```
+```
+echo <номер порта> > /sys/class/gpio/export
+```
 ---
 Отключение GPIO-порта:
-```echo <номер порта> > /sys/class/gpio/unexport```
+```
+echo <номер порта> > /sys/class/gpio/unexport
+```
 ---
 Получение направления GPIO-порта (in/out):
-```cat /sys/class/gpio/gpio<номер порта>/direction```
+```
+cat /sys/class/gpio/gpio<номер порта>/direction
+```
 ---
 Смена направления GPIO-порта (in - вход, out - выход):
 ```
@@ -16,7 +22,9 @@ echo out > /sys/class/gpio/gpio<номер порта>/direction
 ```
 ---
 Получение значения GPIO-порта low(0)/high(1):
-```cat /sys/class/gpio/gpio<номер порта>/value```
+```
+cat /sys/class/gpio/gpio<номер порта>/value
+```
 ---
 Смена значений GPIO-порта (low/high):
 Для смены значения порта нужно поменять его direction на out
