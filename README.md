@@ -1,74 +1,33 @@
-
-# !!!!! Для изменения value у пина нужно поменять direction на out !!!!!
-
+# Скрипт управления вентилятором охлаждения для OrangePi
+Протестировано на OrangePi PC с Armbian Buster
 ---
-
-## Включение GPIO-пина:
-```
-echo 13 > /sys/class/gpio/export
-```
-
+## Требования:
+wiringOP: <https://github.com/orangepi-xunlong/wiringOP>
 ---
-
-## Отключение GPIO-пина:
-```
-echo 13 > /sys/class/gpio/unexport
-```
-
+## Установка:
+- Клонировать репозиторий:
+```git clone https://github.com/JDM170/orangepi_coolfan.git```
+- Перейти в директорию репозитория:
+```cd orangepi_coolfan```
+- Скопировать скрипты:
+```cp coolfan-control /usr/bin```
+```cp coolfan-stop /usr/bin```
+```cp coolfan.service /etc/systemd/system```
+- Активировать и запустить службу:
+```systemctl enable coolfan.service```
+```systemctl start coolfan```
 ---
-
-## Получение направления GPIO-пина (in/out):
-```
-cat /sys/class/gpio/gpio(номер пина)/direction
-```
-
----
-
-## Смена направления GPIO-пина (in - вход, out - выход):
-```
-echo in > /sys/class/gpio/gpio(номер пина)/direction
-echo out > /sys/class/gpio/gpio(номер пина)/direction
-```
-
----
-
-## Получение значения GPIO-пина low(0)/high(1):
-```
-cat /sys/class/gpio/gpio(номер пина)/value
-```
-
----
-
-## Смена значений GPIO-пина (low/high):
-```
-echo 0 > /sys/class/gpio/gpio(номер пина)/value
-echo 1 > /sys/class/gpio/gpio(номер пина)/value
-```
-
----
-
-## Расположение скриптов:
-```
-coolfan-* ---- /usr/bin
-coolfan.service ---- /etc/systemd/system/
-```
-
----
-
 ## Управление:
-```
-systemctl enable coolfan.service - включение
-systemctl disable coolfan.service - отключение
-systemctl status coolfan - статус
-systemctl start coolfan - запуск
-systemctl restart coolfan - перезапуск
-systemctl stop coolfan - остановка
-```
-
+Управление службой производится следующими командами:
+- Узнать состояние: ```systemctl status coolfan```
+- Запустить службу: ```systemctl start coolfan```
+- Перезапустить службу: ```systemctl restart coolfan```
+- Остановить службу: ```systemctl stop coolfan```
 ---
-
-## Если служба падает с 203 кодом ошибки:
-```
-Нужно убедиться что у скриптов coolfan-* стоят права -rwxrwxrwx
-Их можно задать следующей командой: chmod 777 /usr/bin/coolfan-*
-```
+## Если служба завершается с кодом 203:
+- Убеждаемся что у ```coolfan-control``` и ```coolfan-stop``` стоят права ```-rwxrwxrwx```
+- Узнать можно их следующим способом:
+```ls -la /usr/bin | grep coolfan```
+- Если права не совпадают, то нужно обновить их следующей командой:
+```chmod 777 /usr/bin/coolfan-control```
+```chmod 777 /usr/bin/coolfan-stop```
