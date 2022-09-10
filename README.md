@@ -1,9 +1,6 @@
 # Скрипт управления вентилятором охлаждения для OrangePi
 Протестировано на OrangePi PC с Armbian Buster
 ---
-## Требования:
-wiringOP: <https://github.com/orangepi-xunlong/wiringOP>
----
 ## Установка:
 - Клонировать репозиторий:
 ```git clone https://github.com/JDM170/orangepi_coolfan.git```

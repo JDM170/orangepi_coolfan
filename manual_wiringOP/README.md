@@ -1,5 +1,8 @@
 ## Небольшой мануал по командам wiringOP
 ---
+## Требования чтобы скрипт работал:
+wiringOP: <https://github.com/orangepi-xunlong/wiringOP>
+---
 Включение GPIO-порта:
 ```
 gpio export <номер порта> <in/out>
