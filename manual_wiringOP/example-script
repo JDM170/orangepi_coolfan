@@ -1,7 +1,8 @@
 #!/bin/sh
 
-readonly FAN_PIN=13
-readonly FAN_PATH=/sys/class/gpio/gpio${FAN_PIN}
+# Physical  | V | Mode | Name     | wPi | GPIO
+# 8         | 0 | OUT  | TXD.3    | 3   | 13
+readonly FAN_PIN=3
 readonly FAN_START=44000
 readonly FAN_STOP=35000
 readonly SLEEP_TIME=10
@@ -9,21 +10,20 @@ FAN_STATE=0
 
 setup()
 {
-    echo $FAN_PIN > /sys/class/gpio/export
-    echo "out" > $FAN_PATH/direction
-    echo 0 > $FAN_PATH/value
+    gpio export $FAN_PIN out
+    gpio write $FAN_PIN 0
 }
 cleanup()
 {
-    echo 0 > $FAN_PATH/value
-    echo $FAN_PIN > /sys/class/gpio/unexport
+    gpio write $FAN_PIN 0
+    gpio unexport $FAN_PIN
     rm /var/run/coolfan.pid
     exit 0
 }
 setFanState()
 {
-    if [ $(cat $FAN_PATH/value) != $1 ] ; then
-        echo $1 > $FAN_PATH/value
+    if [ $(gpio read $FAN_PIN) != $1 ] ; then
+        gpio write $FAN_PIN $1
     fi
 }
 
@@ -31,7 +31,7 @@ setup
 trap cleanup 15
 echo $$ > /var/run/coolfan.pid
 
-while : ; do
+while :; do
     TEMP=$(cat /sys/class/thermal/thermal_zone0/temp)
 
     if [ "$TEMP" -ge "$FAN_START" ] && [ $FAN_STATE != 1 ] ; then

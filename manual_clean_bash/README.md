@@ -32,6 +32,3 @@ cat /sys/class/gpio/gpio<номер порта>/value
 echo 0 > /sys/class/gpio/gpio<номер порта>/value
 echo 1 > /sys/class/gpio/gpio<номер порта>/value
 ```
----
-
-В моем случае, скрипт не активировал GPIO-порт, поэтому была использована wiringOP
