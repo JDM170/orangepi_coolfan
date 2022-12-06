@@ -1,11 +1,17 @@
 #!/bin/sh
 
 # Physical  | V | Mode | Name     | wPi | GPIO
+# OrangePi PC
 # 8         | 0 | OUT  | TXD.3    | 3   | 13
-readonly FAN_PIN=13
+# OrangePi 4 LTS
+# 8         | 1 | ALT2 | I2C3_SCL | 3   | 145
+# readonly FAN_PIN=13  # OrangePi PC
+readonly FAN_PIN=145  # OrangePi 4 LTS
 readonly FAN_PATH=/sys/class/gpio/gpio${FAN_PIN}
-readonly FAN_START=44000
-readonly FAN_STOP=35000
+# readonly FAN_START=48000  # OrangePi PC
+# readonly FAN_STOP=40000  # OrangePi PC
+readonly FAN_START=58000  # OrangePi 4 LTS
+readonly FAN_STOP=50000  # OrangePi 4 LTS
 readonly SLEEP_TIME=10
 FAN_STATE=0
 
@@ -19,7 +25,7 @@ cleanup()
 {
     echo 0 > $FAN_PATH/value
     echo $FAN_PIN > /sys/class/gpio/unexport
-    rm /var/run/coolfan.pid
+    rm /run/coolfan.pid
     exit 0
 }
 setFanState()
@@ -31,7 +37,7 @@ setFanState()
 
 setup
 trap cleanup 15
-echo $$ > /var/run/coolfan.pid
+echo $$ > /run/coolfan.pid
 
 while : ; do
     TEMP=$(cat /sys/class/thermal/thermal_zone0/temp)
