@@ -1,5 +1,8 @@
 # Скрипт управления вентилятором охлаждения для OrangePi
 Протестировано на OrangePi PC с Armbian Buster
+Протестировано на OrangePi 4 LTS с Armbian Bullseye
+---
+Команды ```systemctl```, ```chmod``` выполняются от имени администратора! (Через ```sudo```, пр. ```sudo systemctl restart coolfan```)
 ---
 ## Установка:
 - Клонировать репозиторий:
@@ -36,3 +39,7 @@ systemctl start coolfan
 chmod 777 /usr/bin/coolfan-control
 chmod 777 /usr/bin/coolfan-stop
 ```
+---
+## Если в логе появляется строка вида: 'systemd[1]: Configuration file /etc/systemd/system/coolfan.service is marked executable. Please remove executable permission bits. Proceeding anyway.'
+- Меняем права у ```coolfan.service```:
+```chmod 644 /etc/systemd/system/coolfan.serivce```
